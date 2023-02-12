@@ -4,16 +4,16 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.AppiumFluentWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import pageObjects.NativePages.BudgetActivityPage;
 import pageObjects.NativePages.LogInPage;
 import pageObjects.NativePages.RegisterPage;
 import pageObjects.PageObject;
-
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,6 +22,10 @@ import steps.ActionStep;
 import steps.AssertStep;
 
 public class BaseTest implements IDriver {
+
+    protected String email = System.getenv("email");
+    protected String username = System.getenv("userName");
+    protected String password = System.getenv("password");
 
     public static AssertStep assertStep;
     public static ActionStep actionStep;
@@ -59,13 +63,9 @@ public class BaseTest implements IDriver {
     }
 
     @AfterSuite(alwaysRun = true)
-    public void tearDown() {
-        try {
-            System.out.println("After");
-            appiumDriver.closeApp();
-        } catch (NullPointerException nullPointerException) {
-            System.err.println("Appium driver is null: " + nullPointerException);
-        }
+    public void tearDown() throws Exception {
+        System.out.println("After");
+        appiumDriver.closeApp();
     }
 
     private void setAppiumDriver(String platformName, String deviceName, String browserName, String app) {
@@ -102,7 +102,6 @@ public class BaseTest implements IDriver {
         }
     }
 
-    //Getters for pages
     public LogInPage getLogInPage() {
         if (logInPage == null) {
             return new LogInPage(appiumDriver);
@@ -111,19 +110,19 @@ public class BaseTest implements IDriver {
         }
     }
 
-    public RegisterPage getRegisterPage() {
-        if (registerPage == null) {
-            return new RegisterPage(appiumDriver);
-        } else {
-            return registerPage;
-        }
-    }
-
     public BudgetActivityPage getBudgetActivityPage() {
         if (budgetActivityPage == null) {
             return new BudgetActivityPage(appiumDriver);
         } else {
             return budgetActivityPage;
+        }
+    }
+
+    public RegisterPage getRegisterPage() {
+        if (registerPage == null) {
+            return new RegisterPage(appiumDriver);
+        } else {
+            return registerPage;
         }
     }
 

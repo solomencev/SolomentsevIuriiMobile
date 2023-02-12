@@ -1,6 +1,7 @@
 package steps;
 
-import static java.sql.DriverManager.getDriver;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
 
 import io.appium.java_client.AppiumDriver;
 import org.testng.Assert;
@@ -11,10 +12,19 @@ public class AssertStep extends BaseStep {
         super(appiumDriver);
     }
 
-
-    public void ResultsContainsEpamText(String epam) {
+    public void assertResultsContainsEpamText(String text) {
         GooglePage page = new GooglePage(getDriver());
-        Assert.assertTrue(page.isResultsContainsText(epam), "Messages in result don't match search request");
+        Assert.assertTrue(page.isResultsContainsText(text), "Messages in result don't match search request");
+    }
+
+    public void assertTextBudgetActivity() {
+        waitContentLoadById(getBudgetActivityPage().getIdAllBudgetActivity());
+        assertNotNull(getBudgetActivityPage().getBudgetActivityText(), "Budget Activity message was not found");
+    }
+
+    public void assertButtonAddExpense() {
+        waitContentLoadById(getBudgetActivityPage().getIdAllBudgetActivity());
+        assertTrue(getBudgetActivityPage().getAddExpenseBtn().isDisplayed());
 
     }
 }

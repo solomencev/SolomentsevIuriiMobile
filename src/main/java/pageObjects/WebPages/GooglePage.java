@@ -30,7 +30,6 @@ public class GooglePage extends WebPageObject {
         for (WebElement result : searchResultsList) {
             String text = result.getText();
             if (text.contains(search)) {
-                System.out.println(text);
                 return true;
             }
         }

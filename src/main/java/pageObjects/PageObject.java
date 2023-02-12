@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import pageObjects.NativePages.LogInPage;
 import pageObjects.WebPages.WebPageObject;
 import setup.IPageObject;
-
 import java.lang.reflect.Field;
 
 public class PageObject implements IPageObject {

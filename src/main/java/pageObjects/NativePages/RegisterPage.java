@@ -23,9 +23,6 @@ public class RegisterPage extends BaseNativePage {
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/register_new_account_button")
     WebElement registerBtn;
 
-    @FindBy(xpath = "//android.widget.CheckedTextView")
-    private WebElement iReadCheckbox;
-
     public RegisterPage(AppiumDriver driver) {
         super(driver);
     }
@@ -36,10 +33,6 @@ public class RegisterPage extends BaseNativePage {
 
     public String getIdAllRegisterForm() {
         return idAllRegisterForm;
-    }
-
-    public WebElement getReadCheckbox() {
-        return iReadCheckbox;
     }
 
     public void fillRegisterForm(String email, String username, String password) {
