@@ -1,6 +1,7 @@
 package setup;
 
 import io.appium.java_client.AppiumDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
 import pageObjects.PageObject;
@@ -38,6 +39,11 @@ public class BaseTest implements IDriver {
     }
 
     private void setAppiumDriver(String platformName, String deviceName, String browserName, String app){
+
+        WebDriverManager wdm = WebDriverManager.chromedriver();
+        wdm.setup();
+        String chromedriverPath = wdm.getDownloadedDriverPath();
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         //mandatory Android capabilities
         capabilities.setCapability("platformName",platformName);
@@ -47,6 +53,7 @@ public class BaseTest implements IDriver {
 
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("chromedriverDisableBuildCheck","true");
+        capabilities.setCapability("chromedriverExecutable", chromedriverPath);
 
         try {
             appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
