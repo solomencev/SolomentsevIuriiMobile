@@ -2,4 +2,4 @@ This framework tests two scenarios: the first is related to a native application
 
 To test a native application, you need to add environment variables ( email, username, password) at the maven level:
 
-<img alt="img_1.png" height="200" src="img_1.png" width="200"/>
+<img alt="img.png" height="200" src="img.png" width="200"/>
