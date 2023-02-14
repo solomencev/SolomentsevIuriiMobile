@@ -7,8 +7,5 @@ public class WebPageObject  {
 
     public WebPageObject(AppiumDriver appiumDriver) {
         PageFactory.initElements(appiumDriver, this);
-
     }
-
-
 }
