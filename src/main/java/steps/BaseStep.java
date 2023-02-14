@@ -26,5 +26,4 @@ public class BaseStep extends BaseTest {
         googlePage = new GooglePage(driver);
         pageObject = new WebPageObject(driver);
     }
-
 }

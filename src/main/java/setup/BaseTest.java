@@ -3,6 +3,7 @@ package setup;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.AppiumFluentWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,7 +20,7 @@ import steps.ActionStep;
 import steps.AssertStep;
 
 public class BaseTest implements IDriver {
-
+    private static final Logger log = Logger.getLogger(String.valueOf(BaseTest.class));
     protected String email = System.getenv("email");
     protected String username = System.getenv("userName");
     protected String password = System.getenv("password");
@@ -44,7 +45,7 @@ public class BaseTest implements IDriver {
     @BeforeSuite(alwaysRun = true)
     public void setUp(String platformName, String appType, String deviceName,
                       @Optional("") String browserName, @Optional("") String app) throws Exception {
-        System.out.println("Before: app type - " + appType);
+        log.info("Before: app type - " + appType);
         setAppiumDriver(platformName, deviceName, browserName, app);
         actionStep = new ActionStep(getDriver());
         assertStep = new AssertStep(getDriver());
@@ -54,7 +55,7 @@ public class BaseTest implements IDriver {
 
     @AfterSuite(alwaysRun = true)
     public void tearDown() throws Exception {
-        System.out.println("After");
+        log.info("App is closed");
         appiumDriver.closeApp();
     }
 
