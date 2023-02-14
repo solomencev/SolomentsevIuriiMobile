@@ -10,9 +10,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import pageObjects.NativePages.BudgetActivityPage;
-import pageObjects.NativePages.LogInPage;
-import pageObjects.NativePages.RegisterPage;
 import pageObjects.PageObject;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -29,13 +26,9 @@ public class BaseTest implements IDriver {
 
     public static AssertStep assertStep;
     public static ActionStep actionStep;
-    private static AppiumDriver appiumDriver; // singleton
+    protected static AppiumDriver appiumDriver; // singleton
     IPageObject po;
-
-    LogInPage logInPage;
-    RegisterPage registerPage;
     AppiumFluentWait webDriverWait;
-    BudgetActivityPage budgetActivityPage;
     static final int waitTime = 10;
 
     @Override
@@ -51,15 +44,12 @@ public class BaseTest implements IDriver {
     @BeforeSuite(alwaysRun = true)
     public void setUp(String platformName, String appType, String deviceName,
                       @Optional("") String browserName, @Optional("") String app) throws Exception {
-
-        actionStep = new ActionStep(appiumDriver);
-        assertStep = new AssertStep(appiumDriver);
-
         System.out.println("Before: app type - " + appType);
         setAppiumDriver(platformName, deviceName, browserName, app);
+        actionStep = new ActionStep(getDriver());
+        assertStep = new AssertStep(getDriver());
         setPageObject(appType, appiumDriver);
         appiumDriver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
-
     }
 
     @AfterSuite(alwaysRun = true)
@@ -96,30 +86,6 @@ public class BaseTest implements IDriver {
 
     private void setPageObject(String appType, AppiumDriver appiumDriver) throws Exception {
         po = new PageObject(appType, appiumDriver);
-    }
-
-    public LogInPage getLogInPage() {
-        if (logInPage == null) {
-            return new LogInPage(appiumDriver);
-        } else {
-            return logInPage;
-        }
-    }
-
-    public BudgetActivityPage getBudgetActivityPage() {
-        if (budgetActivityPage == null) {
-            return new BudgetActivityPage(appiumDriver);
-        } else {
-            return budgetActivityPage;
-        }
-    }
-
-    public RegisterPage getRegisterPage() {
-        if (registerPage == null) {
-            return new RegisterPage(appiumDriver);
-        } else {
-            return registerPage;
-        }
     }
 
     public AppiumFluentWait getWebDriverWait() {

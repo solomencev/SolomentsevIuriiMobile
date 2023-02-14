@@ -23,19 +23,18 @@ public class ActionStep extends BaseStep {
         getDriver().getKeyboard().pressKey(Keys.ENTER);
     }
 
-    public void clickRegistrationButton() {
-        getLogInPage().clickRegisterButton();
+    public void clickRegistrationBtn() {
+        logInPage.clickRegisterButton();
     }
 
     public void submitRegistrationForm() {
-        waitContentLoadById(getRegisterPage().getIdAllRegisterForm());
-        getRegisterPage().fillRegisterForm(email, username, password);
-        getRegisterPage().getRegisterBtn().click();
+        waitContentLoadById(registerPage.getIdAllRegisterForm());
+        registerPage.fillRegisterForm(email, username, password);
+        registerPage.getRegisterBtn().click();
     }
 
     public void logIn() {
-        waitContentLoadById(getLogInPage().getIdAllLoginForm());
-        getLogInPage().signIn(email, password);
+        waitContentLoadById(logInPage.getIdAllLoginForm());
+        logInPage.signIn(email, password);
     }
-
 }

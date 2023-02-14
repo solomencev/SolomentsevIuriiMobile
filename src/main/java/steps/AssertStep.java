@@ -18,13 +18,12 @@ public class AssertStep extends BaseStep {
     }
 
     public void assertTextBudgetActivity() {
-        waitContentLoadById(getBudgetActivityPage().getIdAllBudgetActivity());
-        assertNotNull(getBudgetActivityPage().getBudgetActivityText(), "Budget Activity message was not found");
+        waitContentLoadById(budgetActivityPage.getIdAllBudgetActivity());
+        assertNotNull(budgetActivityPage.getBudgetActivityText(), "Budget Activity message was not found");
     }
 
     public void assertButtonAddExpense() {
-        waitContentLoadById(getBudgetActivityPage().getIdAllBudgetActivity());
-        assertTrue(getBudgetActivityPage().getAddExpenseBtn().isDisplayed());
-
+        waitContentLoadById(budgetActivityPage.getIdAllBudgetActivity());
+        assertTrue(budgetActivityPage.getAddExpenseBtn().isDisplayed());
     }
 }

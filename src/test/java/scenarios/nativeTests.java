@@ -8,12 +8,10 @@ public class nativeTests extends BaseTest {
 
     @Test(groups = {"native"}, description = "Check that the Budget Activity page is displayed")
     public void nativeTest() {
-
-        actionStep.clickRegistrationButton();
+        actionStep.clickRegistrationBtn();
         actionStep.submitRegistrationForm();
         actionStep.logIn();
         assertStep.assertTextBudgetActivity();
         assertStep.assertButtonAddExpense();
-
     }
 }
