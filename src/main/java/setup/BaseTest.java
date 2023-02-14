@@ -94,12 +94,8 @@ public class BaseTest implements IDriver {
         }
     }
 
-    private void setPageObject(String appType, AppiumDriver appiumDriver) {
-        try {
-            po = new PageObject(appType, appiumDriver);
-        } catch (Exception e) {
-            throw new RuntimeException("Exception while Page Object setting:" + e);
-        }
+    private void setPageObject(String appType, AppiumDriver appiumDriver) throws Exception {
+        po = new PageObject(appType, appiumDriver);
     }
 
     public LogInPage getLogInPage() {
