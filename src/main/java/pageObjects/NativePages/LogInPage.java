@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class LogInPage extends BaseNativePage {
 
-    public static final String idAllLoginForm = allElementsIdSelectorCommonPart + "login_form";
+    public static final String ID_LOGIN_FORM = ALL_ELEMENTS_ID_SELECTOR_COMMON_PART + "login_form";
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/email_sign_in_button")
     private WebElement signInBtn;
 
@@ -28,7 +28,7 @@ public class LogInPage extends BaseNativePage {
     }
 
     public String getIdAllLoginForm() {
-        return idAllLoginForm;
+        return ID_LOGIN_FORM;
     }
 
     public void signIn(String emailOrUsername, String password) {

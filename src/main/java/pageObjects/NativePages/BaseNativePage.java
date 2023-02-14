@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BaseNativePage {
 
-    static final String allElementsIdSelectorCommonPart = "platkovsky.alexey.epamtestapp:id/";
+    static final String ALL_ELEMENTS_ID_SELECTOR_COMMON_PART = "platkovsky.alexey.epamtestapp:id/";
 
     //BasePage
     private AppiumDriver driver;

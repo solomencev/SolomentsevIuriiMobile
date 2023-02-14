@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class BudgetActivityPage extends BaseNativePage {
 
-    private static final String idAllBudgetActivity = allElementsIdSelectorCommonPart + "main_content";
+    private static final String ID_ALL_BUDGET_ACTIVITY = ALL_ELEMENTS_ID_SELECTOR_COMMON_PART + "main_content";
 
     @FindBy(xpath = "//*[contains(@text,'BudgetActivity')]")
     private WebElement budgetActivityText;
@@ -27,6 +27,6 @@ public class BudgetActivityPage extends BaseNativePage {
     }
 
     public String getIdAllBudgetActivity() {
-        return idAllBudgetActivity;
+        return ID_ALL_BUDGET_ACTIVITY;
     }
 }
