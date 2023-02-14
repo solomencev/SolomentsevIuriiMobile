@@ -11,11 +11,9 @@ public class webTests extends BaseTest {
 
     @Test(groups = {"web"}, description = "Check that the word EPAM is displayed in the search results")
     public void WebTest() {
-
         actionStep.openWebSite(GOOGLE_URL);
         actionStep.typeValueInSearchFiled(SEARCH_TEXT);
         actionStep.clickEnterInSearchFiled();
         assertStep.assertResultsContainsEpamText(TEXT);
-
     }
 }
