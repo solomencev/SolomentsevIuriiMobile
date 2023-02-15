@@ -60,7 +60,8 @@
                         <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <ts.appium>http://localhost:4723/wd/hub</ts.appium>
+                        <!--<ts.appium>http://localhost:4723/wd/hub</ts.appium>-->
+                        <ts.appium>https://${env.EPAM_NAME_SURNAME}:${env.MOBITRU_TOKEN}@app.mobitru.com/wd/hub</ts.appium>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
