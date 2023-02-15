@@ -77,21 +77,33 @@
     </build>
     <profiles>
         <profile>
-            <id>native</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
+            <id>nativeAndroid</id>
             <properties>
-                <suite.file>src/test/resources/nativeTNG.xml</suite.file>
+                <suite.file>src/test/resources/nativeAndroidTNG.xml</suite.file>
             </properties>
         </profile>
+
         <profile>
-            <id>web</id>
+            <id>nativeIOS</id>
+            <properties>
+                <suite.file>src/test/resources/nativeIOSTNG.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>webAndroid</id>
+            <properties>
+                <suite.file>./src/test/resources/webAndroidTNG.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>webIOS</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.file>./src/test/resources/webTNG.xml</suite.file>
+                <suite.file>./src/test/resources/webIOSTNG.xml</suite.file>
             </properties>
         </profile>
     </profiles>

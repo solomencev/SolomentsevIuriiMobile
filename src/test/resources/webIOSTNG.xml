@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Web mobile testing Suite">
+  <parameter name="appType" value="web"/>
+  <parameter name="udid" value="00008030-001525D91A92802E"/>
+  <parameter name="platformName" value="iOS"/>
+  <parameter name="browserName" value="Safari"/>
+  <test name="Web tests">
+    <groups>
+      <run>
+        <include name="Web"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="scenarios"/>
+    </packages>
+  </test>
+</suite>
