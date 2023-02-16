@@ -74,7 +74,7 @@ public class GooglePage extends BaseTest {
 
     public void runSearchQuery(String text) {
         String platformName = (String) getDriver().getCapabilities().getCapability("platformName");
-        System.out.println("PLATFORM NAME = " + platformName);
+        LOGGER.info("PLATFORM NAME = " + platformName);
 
         if (platformName.equals("Android")) {
             searchString.sendKeys(text, Keys.ENTER);
