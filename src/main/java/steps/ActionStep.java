@@ -2,7 +2,6 @@ package steps;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.Keys;
-import pageObjects.WebPages.GooglePage;
 
 public class ActionStep extends BaseStep {
 
@@ -12,11 +11,6 @@ public class ActionStep extends BaseStep {
 
     public void openWebSite(String url) {
         getDriver().get(url);
-    }
-
-    public void typeValueInSearchFiled(String value) {
-        GooglePage page = new GooglePage(getDriver());
-        page.fillSearchField(value);
     }
 
     public void clickEnterInSearchFiled() {
@@ -40,5 +34,9 @@ public class ActionStep extends BaseStep {
 
     public void acceptCookie() {
         googlePage.acceptHungaryCookie(getWebDriverWait());
+    }
+
+    public void search(String value) {
+        googlePage.runSearchQuery(value);
     }
 }

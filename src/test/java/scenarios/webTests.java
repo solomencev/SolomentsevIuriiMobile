@@ -11,11 +11,11 @@ import setup.BaseTest;
 public class webTests extends BaseTest {
 
     @Parameters({"platformName"})
-    @Test(groups = {"Web"}, description = "Check that the word EPAM is displayed in the search results")
+    @Test(groups = {"web"}, description = "Check that the word EPAM is displayed in the search results")
     public void WebTest() {
         actionStep.openWebSite(GOOGLE_URL);
         actionStep.acceptCookie();
-        actionStep.typeValueInSearchFiled(SEARCH_TEXT);
+        actionStep.search(SEARCH_TEXT);
         actionStep.clickEnterInSearchFiled();
         assertStep.assertResultsContainsEpamText(TEXT);
     }

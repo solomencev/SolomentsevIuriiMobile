@@ -8,7 +8,7 @@
   <test name="Web tests">
     <groups>
       <run>
-        <include name="Web"/>
+        <include name="web"/>
       </run>
     </groups>
     <packages>

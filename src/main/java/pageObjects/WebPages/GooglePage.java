@@ -3,7 +3,6 @@ package pageObjects.WebPages;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.AppiumFluentWait;
 import java.util.List;
-import java.util.Locale;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,27 +28,16 @@ public class GooglePage extends BaseTest {
     @FindBy(xpath = "//*[@id='rso']/*")
     private List<WebElement> searchResults;
 
-    //Change "Olvasson" to your scroll down button text if it differs
     @FindBy(xpath = "//button//*[contains(text(),'Olvasson')]")
     private WebElement scrollButton;
 
-    //Change "eluta" to your accept cookie button text if it differs
     @FindBy(xpath = "//button//*[contains(text(),'eluta')]")
     private WebElement acceptButton;
-
-    /*public GooglePage(AppiumDriver driver) {
-        super(driver);
-    }*/
 
     public GooglePage(AppiumDriver appiumDriver) {
 
         PageFactory.initElements(appiumDriver, this);
 
-    }
-
-    public void fillSearchField(String search) {
-        searchField.click();
-        searchField.sendKeys(search);
     }
 
     public boolean isResultsContainsText(String search) {
@@ -85,25 +73,16 @@ public class GooglePage extends BaseTest {
     }
 
     public void runSearchQuery(String text) {
-
         String platformName = (String) getDriver().getCapabilities().getCapability("platformName");
         System.out.println("PLATFORM NAME = " + platformName);
 
         if (platformName.equals("Android")) {
-
             searchString.sendKeys(text, Keys.ENTER);
-
         } else if (platformName.equals("iOS")) {
-
-            //this actually does not work on Mobitru website (still looking for workaround)
+            //This is not working at the moment
             searchString.sendKeys(text);
             searchString.sendKeys(Keys.RETURN);
 
         }
-
-        //waitUntilPageIsLoaded();
-
     }
-
-
 }
