@@ -76,7 +76,9 @@ public class BaseTest implements IDriver {
         wdm.setup();
         String chromedriverPath = wdm.getDownloadedDriverPath();
 
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
+
         /** mandatory Android capabilities. */
         capabilities.setCapability("platformName", platformName);
         capabilities.setCapability("deviceName", deviceName);
@@ -88,7 +90,6 @@ public class BaseTest implements IDriver {
 
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("chromedriverDisableBuildCheck", "true");
-        capabilities.setCapability("chromedriverExecutable", chromedriverPath);
 
         /** Capabilities for test of Android native app on EPAM Mobile Cloud. */
         capabilities.setCapability("appPackage", appPackage);
@@ -96,6 +97,7 @@ public class BaseTest implements IDriver {
 
         /** Capabilities for test of iOS native app on EPAM Mobile Cloud. */
         capabilities.setCapability("bundleId", bundleId);
+        //capabilities.setCapability("chromedriverExecutable", chromedriverPath);
 
         try {
             String url = String.format("https://%s:%s@app.mobitru.com/wd/hub", System.getenv("EPAM_NAME_SURNAME"),

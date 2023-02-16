@@ -37,4 +37,8 @@ public class ActionStep extends BaseStep {
         waitContentLoadById(logInPage.getIdAllLoginForm());
         logInPage.signIn(email, password);
     }
+
+    public void acceptCookie() {
+        googlePage.acceptHungaryCookie(getWebDriverWait());
+    }
 }
