@@ -3,6 +3,7 @@ package setup;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.AppiumFluentWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.By;
@@ -42,12 +43,20 @@ public class BaseTest implements IDriver {
         return po;
     }
 
-    @Parameters({"platformName", "appType", "deviceName", "browserName", "app"})
+    @Parameters({"platformName", "appType", "deviceName", "udid", "browserName", "app", "appPackage", "appActivity",
+        "bundleId"})
     @BeforeSuite(alwaysRun = true)
-    public void setUp(String platformName, String appType, String deviceName,
-                      @Optional("") String browserName, @Optional("") String app) throws Exception {
+    public void setUp(String platformName,
+                      String appType,
+                      @Optional("") String deviceName,
+                      @Optional("") String udid,
+                      @Optional("") String browserName,
+                      @Optional("") String app,
+                      @Optional("") String appPackage,
+                      @Optional("") String appActivity,
+                      @Optional("") String bundleId) throws Exception {
         LOGGER.info("Before: app type - "  +  appType);
-        setAppiumDriver(platformName, deviceName, browserName, app);
+        setAppiumDriver(platformName, deviceName, udid, browserName, app, appPackage, appActivity, bundleId);
         actionStep = new ActionStep(getDriver());
         assertStep = new AssertStep(getDriver());
         setPageObject(appType, appiumDriver);
@@ -60,16 +69,20 @@ public class BaseTest implements IDriver {
         appiumDriver.closeApp();
     }
 
-    private void setAppiumDriver(String platformName, String deviceName, String browserName, String app) {
+    private void setAppiumDriver(String platformName, String deviceName, String udid, String browserName,
+                                 String app, String appPackage, String appActivity, String bundleId) {
 
         WebDriverManager wdm = WebDriverManager.chromedriver();
         wdm.setup();
         String chromedriverPath = wdm.getDownloadedDriverPath();
 
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        //mandatory Android capabilities
+
+        /** mandatory Android capabilities. */
         capabilities.setCapability("platformName", platformName);
         capabilities.setCapability("deviceName", deviceName);
+        capabilities.setCapability("udid", udid);
 
         if (app.endsWith(".apk")) {
             capabilities.setCapability("app", (new File(app)).getAbsolutePath());
@@ -77,10 +90,19 @@ public class BaseTest implements IDriver {
 
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("chromedriverDisableBuildCheck", "true");
-        capabilities.setCapability("chromedriverExecutable", chromedriverPath);
+
+        /** Capabilities for test of Android native app on EPAM Mobile Cloud. */
+        capabilities.setCapability("appPackage", appPackage);
+        capabilities.setCapability("appActivity", appActivity);
+
+        /** Capabilities for test of iOS native app on EPAM Mobile Cloud. */
+        capabilities.setCapability("bundleId", bundleId);
+        //capabilities.setCapability("chromedriverExecutable", chromedriverPath);
 
         try {
-            appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
+            String url = String.format("https://%s:%s@app.mobitru.com/wd/hub", System.getenv("EPAM_NAME_SURNAME"),
+                URLEncoder.encode(System.getenv("MOBITRU_TOKEN")));
+            appiumDriver = new AppiumDriver(new URL(url), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
